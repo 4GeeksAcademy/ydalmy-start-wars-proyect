@@ -1,175 +1,85 @@
+/* DetailCard.scss */
+
+/* ===============================================
+   1) Contenedor principal: ancho máximo y centrado
+   =============================================== */
 .detail-card-wrapper {
-    width: 100%;
-    max-width: 900px;
-    /* la tarjeta nunca será más ancha que 900px */
-    margin: 0 auto;
-    /* centra horizontalmente */
-    padding: 1rem;
-    /* un poco de espacio en móviles */
+  width: 100%;
+  max-width: 900px;      /* la tarjeta nunca será más ancha que 900px */
+  margin: 0 auto;        /* centra horizontalmente */
+  padding: 1rem;         /* un poco de espacio en móviles */
 }
 
+/* ===============================================
+   2) Tarjeta principal: fondo oscuro y bordes
+   =============================================== */
 .detail-card {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    background-color: #1a1a1a;
-    border: 1px solid #333;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* ===============================================
+   3) Header: imagen + título + botón favorito
+   =============================================== */
+.detail-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+/* La imagen ocupa toda la anchura en móvil, y tamaño fijo en desktop */
+.detail-image {
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+  
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 2rem;
+  }
+  img {
+    display: block;
+    width: 200px;       /* ancho fijo de la imagen */
+    height: 200px;      /* alto fijo */
+    object-fit: cover;  /* recorta si hace falta */
     border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    position: relative;
+    border: 1px solid #444;
+  }
+}
+/* Título y botón de favorito, uno al lado del otro en desktop */
+.detail-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin: 0;
+  }
+.btn-fav {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    padding: 0.25rem 0.75rem;
 
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 20px;
-        background: #1e1e1e;
-        clip-path: polygon(0 0, 100% 0, 50% 100%);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    @media (min-width: 768px) {
+      margin-left: 1rem;
+      margin-top: 0;
     }
-
-    .detail-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1.5rem;
-
-        @media (min-width: 768px) {
-            flex-direction: row;
-            align-items: flex-start;
-        }
-    }
-
-    .detail-main {
-        display: flex;
-        flex-wrap: wrap;
-
-        /* La imagen ocupa toda la anchura en móvil, y tamaño fijo en desktop */
-        .detail-image {
-            flex-shrink: 0;
-            margin-bottom: 1rem;
-
-            @media (min-width: 768px) {
-                margin-bottom: 0;
-                margin-right: 2rem;
-            }
-
-            .detail-image {
-                flex: 1 1 50%;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    object-fit: cover;
-                    display: block;
-                }
-
-                img {
-                    display: block;
-                    width: 200px;
-                    /* ancho fijo de la imagen */
-                    height: 200px;
-                    /* alto fijo */
-                    object-fit: cover;
-                    /* recorta si hace falta */
-                    border-radius: 8px;
-                    border: 1px solid #444;
-                }
-            }
-
-            .detail-info {
-                flex: 1 1 50%;
-                padding: 1.5rem;
-                position: relative;
-
-                /* Título y botón de favorito, uno al lado del otro en desktop */
-                .detail-title {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-
-                    h2 {
-                        color: #fff;
-                        margin: 0 0 1rem;
-                        font-size: 1.75rem;
-                        font-family: "StarJedi", sans-serif;
-                    }
-
-                    @media (min-width: 768px) {
-                        flex-direction: row;
-                        align-items: center;
-                        text-align: left;
-                    }
-
-                    p {
-                        line-height: 1.6;
-                        margin-bottom: 1rem;
-                    }
-
-                    h1 {
-                        font-size: 2rem;
-                        color: #fff;
-                        margin: 0;
-                    }
-
-                    .btn-fav {
-                        position: absolute;
-                        top: 1.5rem;
-                        right: 1.5rem;
-
-                        /* Ya hereda btn btn-outline-warning desde el JSX */
-                        .btn-fav {
-                            margin-top: 0.5rem;
-                            font-size: 1rem;
-                            padding: 0.25rem 0.75rem;
-
-                            @media (min-width: 768px) {
-                                margin-left: 1rem;
-                                margin-top: 0;
-                            }
-                        }
-                    }
-
-    .detail-footer {
-    border-top: 1px solid #333;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-
-    .footer-item {
-      strong {
-        display: block;
-        margin-bottom: 0.25rem;
-        color: #f44336;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-      }
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        li {
-          font-size: 0.85rem;
-          margin-bottom: 0.3rem;
-          &::before {
-            content: "• ";
-            color: #f44336;
-          }
-          a {
-            color: #e0e0e0;
-            text-decoration: underline;
-            &:hover {
-              color: #fff;
-            }
-          }
-        }
-      }
-    }
+  }
+}
 /* Botón favorito activo (cuando está en favoritos) */
 .btn-fav.active {
   background-color: #ffcd00;

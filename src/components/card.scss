@@ -1,121 +1,54 @@
+/* ===========================================Add commentMore actions
+   CardItem.scss
+   =========================================== */
+
+/* Cada <li> (grid-item) no necesita márgenes extra */
 .grid-item {
   margin: 0;
   padding: 0;
 }
-.entity-container {
-  position: relative;
-}
+/* ===========================================Add commentMore actions
+   1) Tarjeta oscura con sombra y bordes redondeados
+   =========================================== */
 .card-dark {
   background-color: #1a1a1a;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  background: #1e1e1e;
-  transition: transform .3s ease, box-shadow .3s ease;
-  cursor: pointer;
-
-  &.ratio-16x9 .entry-details-card-container {
-    position: relative;
-    padding-top: 56.25%;
-  }
-  &:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    box-shadow: 0 0 20px rgba(244,67,54,0);
-    transition: box-shadow .3s ease;
-    pointer-events: none;
-    border-radius: inherit;
-  }
-  &:hover::after {
-    box-shadow: 0 0 20px rgba(244,67,54,.8);
-  }
-}
-
-.entity-mask {
-  position: relative;
-}
-.entity-link.outer-link {
-    display: block;
-    position: absolute;
-    inset: 0;
-    text-decoration: none;
-  }
-  .default-box.entity-box {
-    position: absolute;
-    inset: 0;
-    background: #1b1b1b;
-    border-radius: inherit;
-    overflow: hidden;
-  }
-}
-
-.aspect.entry-details-card-container {
-  position: relative;
-}
-.entry-details-card {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
+  
+
+.entry-details-card-inner {
+/* ===========================================
+   2) Contenedor de imagen (sin recortes bruscos)
+   =========================================== */
 .image-container {
   position: relative;
   width: 100%;
-  height: 100%;
+   /* NO height fija; dejamos que la imagen determine su altura proporcional */
+  overflow: hidden;
+  background-color: #000; /* Fondo negro para letterbox si la imagen no llena */
 }
-.image-container {
-    position: absolute;
-    inset: 0;
-    background: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .image-card {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  }
-  .details-container {Add commentMore actions
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #1b1b1b;
-
-    &.no-image {
-      overflow: hidden;
-      background-color: #000;
-    }
-  .details-container-wrapper {Add commentMore actions
-      padding: .75rem;
-    }
-    .details-container-title {
-      margin: 0;
-      font-size: 1rem;
-      color: #fff;
-      line-height: 1.2;
-    }
-  }
-  .image-card {
+.image-card {
   display: block;
   width: 100%;
   height: auto;            /* Mantiene la proporción natural */
   object-fit: contain;     /* Muestra toda la imagen (no recorta) */
   background-color: #000;  /* Para que las franjas vacías sean negras */
 }
+
+/* Si alguna imagen es más ancha que alta, habrá bandas negras arriba/abajo */
+/* Si es más alta que ancha, habrá bandas negras a izquierda/derecha */
+
+/* ===========================================
+   3) Botón de favorito (ícono corazón)
+   =========================================== */
 .entity-fav-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0,0,0,.6);
   top: 10px;
   right: 10px;
   display: inline-flex;
@@ -123,59 +56,49 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
   border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  padding: 4px;
   padding: 0.3rem;
   border-radius: 50%;
-  cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   z-index: 2;
-  transition: background .2s;
-}
-&:hover { background: rgba(0,0,0,.8); }
-  &.active { color: gold; }
-  
-.entity-fav-btn:hover {
+  }
+  entity-fav-btn:hover {
   background-color: rgba(255, 205, 0, 0.8);
 }
- .entity-detailsm {
-  position: absolute;
-  bottom: 0;
-  inset: auto 0 0 0;
-  text-align: left;
-  width: 100%;}
 .entity-fav-btn svg {
   vertical-align: middle;
 }
-.decal-contain {
-    .decal {
-      width: 40px;
-      height: 4px;
-      background: #f44336;
-      margin: .5rem 0 0 1rem;
-    }
-  }
-  .entity-fav-btn.active {
+.entity-fav-btn.active {
   background-color: #ffcd00;
 }
-.title-link {
-    display: block;
-    padding: .5rem 1rem .75rem;
-    text-decoration: none;
 .entity-fav-btn.active svg {
   color: #1a1a1a;
 }
-.title {
-      margin: 0;
-      font-size: 1rem;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-  .details-container {
+/* ===========================================Add commentMore actions
+   4) Contenedor de texto (nombre) con padding adecuado
+   =========================================== */
+.details-container {
   padding: 0.75rem 1rem;   /* Padding levemente aumentado para espacio óptimo */
   text-align: center;
+}
+
+.details-container-title {
+  font-size: 1rem;
+  color: #f5f5f5;
+  margin: 0;
+  word-break: break-word; /* Evita que nombres largos desborden */
+  transition: color 0.2s ease-in-out;
+}
+
+.details-container-title:hover {
+  color: #ffcd00;
+}
+
+/* ===========================================
+   5) Enlace del título sin subrayado salvo hover
+   =========================================== */
+.title-link {
+  text-decoration: none;
+}
+.title-link:hover .details-container-title {
+  text-decoration: underline;
 }

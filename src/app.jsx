@@ -20,20 +20,6 @@ import Favoritos  from "./pages/Favoritos.jsx";
 import Single     from "./pages/Single.jsx";
 export default function App() {
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <Starfield />
-      <Navbar />
-      <main className="flex-grow-1 container my-4">
-        <Routes>
-          <Route path="/" element={<Navigate to="/personajes" replace />} />
-          <Route path="/personajes" element={<Personajes />} />
-          <Route path="/planetas"   element={<Planetas />} />
-          <Route path="/vehiculos"  element={<Vehiculos />} />
-          <Route path="/favoritos"  element={<Favorites />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
     
     <Routes>
       {/*
